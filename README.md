@@ -200,19 +200,6 @@ camerastore/
 
 ---
 
-## 🛡️ Demo Credentials & Admin Access
-
-You can explore both the **Customer Experience** and the **Admin Studio Control Panel**:
-
-- **Customer Login**: Sign in with any custom email/password, or use the instant register form.
-- **Admin Studio Access**:
-  - Direct URL: Navigate to `/admin`
-  - Quick Login: Click **"⚡ Admin Studio"** in the top navigation bar or log in with:
-    - **Email**: `admin@camerastore.com`
-    - **Password**: `admin123` (or click *"Sign in as Admin Demo"*)
-
----
-
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
