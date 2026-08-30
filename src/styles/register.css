@@ -1,0 +1,6 @@
+/* Register inherits from login.css with extras */
+@import './login.css';
+
+.auth-card-wide {
+  max-width: 520px;
+}

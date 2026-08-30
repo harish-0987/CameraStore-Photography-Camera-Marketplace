@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CameraStore – Photography & Camera Marketplace Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d4af37;
+      --primary-dark: #b89628;
+      --text-main: #1f2937;
+      --text-muted: #4b5563;
+      --bg-page: #f9fafb;
+      --card-bg: #ffffff;
+      --border-color: #e5e7eb;
+      --code-bg: #111827;
+      --code-text: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.65;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      color: white;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .no-print-bar h2 {
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-print {
+      background: linear-gradient(135deg, #d4af37 0%, #f3c642 100%);
+      color: #111827;
+      border: none;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .btn-print:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.6);
+    }
+
+    .doc-container {
+      max-width: 960px;
+      margin: 32px auto;
+      background: var(--card-bg);
+      padding: 48px 56px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Document Cover / Header */
+    .doc-header {
+      text-align: center;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 36px;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.15);
+      color: #997505;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .doc-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #111827;
+      margin-bottom: 8px;
+    }
+
+    .doc-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Section Headings */
+    h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #111827;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      font-size: 13px;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f3f4f6;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafafa;
+    }
+
+    /* Code & Blocks */
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      background: #f3f4f6;
+      color: #d97706;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #e5e7eb;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 16px 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 14px 0 20px;
+      border: 1px solid #374151;
+    }
+
+    pre code {
+      background: transparent;
+      color: var(--code-text);
+      padding: 0;
+      border: none;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .diagram-box {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 14px 0 20px;
+      border: 1px solid #1e293b;
+    }
+
+    /* Print Specific Rules */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        font-size: 12pt;
+      }
+
+      .no-print-bar {
+        display: none !important;
+      }
+
+      .doc-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+      }
+
+      h2 {
+        page-break-before: auto;
+        page-break-after: avoid;
+        border-bottom: 1px solid #000;
+        margin-top: 24pt;
+      }
+
+      h3 {
+        page-break-after: avoid;
+      }
+
+      table, pre, .diagram-box {
+        page-break-inside: avoid;
+      }
+
+      pre, .diagram-box {
+        background: #f8fafc !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+
+      pre code {
+        color: #0f172a !important;
+      }
+
+      @page {
+        margin: 20mm 15mm 20mm 15mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar -->
+  <div class="no-print-bar">
+    <h2>📷 CameraStore – Project Documentation</h2>
+    <button class="btn-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+
+  <div class="doc-container">
+    
+    <!-- Cover / Header -->
+    <div class="doc-header">
+      <div class="doc-badge">Official Specification & Architecture</div>
+      <h1 class="doc-title">CameraStore – Photography & Camera Marketplace</h1>
+      <div class="doc-subtitle">React.js + JSON Server Project Documentation (Full 40 Sections)</div>
+    </div>
+
+    <!-- Section 1 -->
+    <h2>1. Project Information</h2>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Project Name</strong></td><td>CameraStore – Photography & Camera Marketplace</td></tr>
+        <tr><td><strong>Project Type</strong></td><td>Single Page Application (SPA) / E-Commerce Web App</td></tr>
+        <tr><td><strong>Frontend</strong></td><td>React.js (v19)</td></tr>
+        <tr><td><strong>Backend / Mock API</strong></td><td>JSON Server (v1.0-beta) / REST API</td></tr>
+        <tr><td><strong>State Management</strong></td><td>Redux Toolkit (<code>@reduxjs/toolkit</code> v2.12) &amp; React-Redux (v9.3) + React Context API</td></tr>
+        <tr><td><strong>API Communication</strong></td><td>Axios (v1.19) with offline LocalStorage fallback</td></tr>
+        <tr><td><strong>Routing</strong></td><td>React Router DOM (v7.18) with Protected Admin Routes</td></tr>
+        <tr><td><strong>UI &amp; Styling</strong></td><td>Modern Dark/Gold Glassmorphism Design System, Responsive CSS3 Grid &amp; Flexbox</td></tr>
+        <tr><td><strong>Icons</strong></td><td>React Icons (<code>react-icons</code> v5.7) &amp; Lucide React (<code>lucide-react</code> v1.34)</td></tr>
+        <tr><td><strong>Build Tool</strong></td><td>Vite (v8.2) with <code>@vitejs/plugin-react</code></td></tr>
+        <tr><td><strong>Process Manager</strong></td><td>Concurrently (v10.0) for running Vite + JSON Server concurrently</td></tr>
+        <tr><td><strong>Version Control</strong></td><td>Git / GitHub</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Section 2 -->
+    <h2>2. Project Overview</h2>
+    <p><strong>CameraStore</strong> is a modern, responsive photography and camera marketplace web application developed using <strong>React.js</strong> and <strong>JSON Server</strong>.</p>
+    <p>The application provides a complete online shopping experience where users can browse cameras, lenses, lighting equipment, tripods, camera bags, and photography accessories, search and filter products, view detailed specifications, manage their wishlist and shopping cart, authenticate through login and registration, and complete a simulated checkout process.</p>
+    <p>The project demonstrates a scalable React.js application using component-based architecture, React Router DOM, Redux Toolkit, Axios, REST APIs, and CRUD operations.</p>
+    <p>The application is designed to simulate a real-world camera marketplace and provides a strong foundation for future integration with a production backend, payment gateway, JWT authentication, and an administrative dashboard.</p>
+
+    <!-- Section 3 -->
+    <h2>3. Project Objectives</h2>
+    <ul>
+      <li>Develop a responsive photography and camera e-commerce web application.</li>
+      <li>Implement reusable React components.</li>
+      <li>Implement client-side routing using React Router DOM.</li>
+      <li>Consume REST APIs using Axios.</li>
+      <li>Implement CRUD operations using JSON Server.</li>
+      <li>Manage global application state using Redux Toolkit.</li>
+      <li>Implement product search, filtering, and sorting.</li>
+      <li>Implement shopping cart functionality.</li>
+      <li>Implement wishlist functionality.</li>
+      <li>Implement mock authentication.</li>
+      <li>Create a responsive and user-friendly interface.</li>
+      <li>Organize the application using a scalable folder structure.</li>
+      <li>Simulate the complete online shopping workflow.</li>
+    </ul>
+
+    <!-- Section 4 -->
+    <h2>4. Key Features</h2>
+    <h3>User Features</h3>
+    <ul>
+      <li><strong>User Registration</strong>: Create new user accounts with validation.</li>
+      <li><strong>User Login</strong>: Authenticate with persistent session storage.</li>
+      <li><strong>Forgot Password</strong>: Password reset workflow with simulated OTP verification.</li>
+      <li><strong>Product Browsing</strong>: Categorized catalog views for Cameras, Lenses, Lighting, Tripods, Bags, and Accessories.</li>
+      <li><strong>Product Search</strong>: Real-time keyword search across names, brands, and categories.</li>
+      <li><strong>Product Filtering</strong>: Multi-facet filtering by category, brand, price slider, and camera type.</li>
+      <li><strong>Product Sorting</strong>: Sort by Price (Low to High, High to Low), Rating, Discount, and Popularity.</li>
+      <li><strong>Product Details</strong>: High-resolution image galleries, technical specifications, and stock indicators.</li>
+      <li><strong>Wishlist Management</strong>: Add/remove favorites with instant badge counter updates.</li>
+      <li><strong>Shopping Cart Management</strong>: Add items, adjust quantities, remove items, and clear cart.</li>
+      <li><strong>Quantity Management</strong>: Real-time item count adjustments with stock limit checks.</li>
+      <li><strong>Coupon Application</strong>: Promo code engine (e.g., <code>CAM10</code>, <code>FESTIVE20</code>, <code>PROPHOTO</code>).</li>
+      <li><strong>Checkout</strong>: Shipping address entry and simulated payment method selection.</li>
+      <li><strong>Order Placement &amp; Confirmation</strong>: Generation of unique order IDs and invoice summaries.</li>
+      <li><strong>User Profile</strong>: Personal details, address book, order history, and saved coupons.</li>
+      <li><strong>Order History</strong>: Chronological tracking with real-time status updates.</li>
+      <li><strong>Logout</strong>: Secure session termination.</li>
+    </ul>
+
+    <h3>Product Features</h3>
+    <ul>
+      <li><strong>Product Categories</strong>: DSLR, Mirrorless, Compact, Action, and Cinema Gear.</li>
+      <li><strong>Product Images</strong>: High-resolution photography gear imagery with gallery previews.</li>
+      <li><strong>Product Description</strong>: In-depth overviews highlighting sensor features and creative uses.</li>
+      <li><strong>Brand</strong>: Filter by industry-standard brands (Sony, Canon, Nikon, Fujifilm, Leica, DJI, etc.).</li>
+      <li><strong>Price &amp; Discount</strong>: Live discount tags displaying original price, current price, and percentage saved.</li>
+      <li><strong>Rating &amp; Reviews</strong>: Star rating scores and customer review counters.</li>
+      <li><strong>Stock Availability</strong>: In-stock status and live quantity tracking.</li>
+      <li><strong>Sensor / Resolution Details</strong>: Megapixel count and sensor formats (Full-Frame, APS-C).</li>
+      <li><strong>Lens Mount / Focal Length</strong>: Mount compatibility (Sony E, Canon RF, Nikon Z) and focal ranges.</li>
+      <li><strong>Compatibility Information</strong>: Lens, battery, and accessory compatibility notes.</li>
+    </ul>
+
+    <!-- Section 5 -->
+    <h2>5. Technology Stack</h2>
+    <table>
+      <thead>
+        <tr><th>Technology</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>React.js (v19)</strong></td><td>Frontend application development</td></tr>
+        <tr><td><strong>React Router DOM</strong></td><td>Client-side routing and page navigation</td></tr>
+        <tr><td><strong>Redux Toolkit</strong></td><td>Global state management with slices and reducers</td></tr>
+        <tr><td><strong>React Redux</strong></td><td>Connecting Redux store with React components</td></tr>
+        <tr><td><strong>Axios</strong></td><td>HTTP requests and REST API communication</td></tr>
+        <tr><td><strong>JSON Server</strong></td><td>Mock REST API / backend database</td></tr>
+        <tr><td><strong>Bootstrap / Custom CSS</strong></td><td>Responsive UI development and glassmorphism styling</td></tr>
+        <tr><td><strong>React Icons / Lucide</strong></td><td>UI icons for actions and navigation</td></tr>
+        <tr><td><strong>Vite</strong></td><td>Development server and build tool</td></tr>
+        <tr><td><strong>Git / GitHub</strong></td><td>Version control and source-code management</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Section 6 -->
+    <h2>6. Software Requirements</h2>
+    <h3>Development Environment</h3>
+    <ul>
+      <li>Node.js (v18.x or higher recommended)</li>
+      <li>npm (v9.x or higher)</li>
+      <li>Visual Studio Code or preferred IDE</li>
+      <li>Git</li>
+      <li>Modern Web Browser</li>
+      <li>JSON Server</li>
+    </ul>
+    <h3>Recommended Browsers</h3>
+    <ul>
+      <li>Google Chrome</li>
+      <li>Microsoft Edge</li>
+      <li>Mozilla Firefox</li>
+      <li>Safari</li>
+    </ul>
+
+    <!-- Section 7 -->
+    <h2>7. Project Setup</h2>
+    <h3>Step 1 – Create / Clone React Application</h3>
+    <pre><code>npm create vite@latest camerastore
+cd camerastore
+npm install</code></pre>
+
+    <h3>Step 2 – Install Required Packages</h3>
+    <pre><code>npm install react-router-dom
+npm install axios
+npm install bootstrap
+npm install react-icons lucide-react
+npm install @reduxjs/toolkit react-redux
+npm install json-server concurrently</code></pre>
+
+    <h3>Step 3 – Start the Project</h3>
+    <pre><code># Start frontend development server
+npm run dev
+
+# Start JSON Server mock REST backend
+json-server --watch db.json --port 5000</code></pre>
+
+    <!-- Section 8 -->
+    <h2>8. Running the Application</h2>
+    <h3>Start React Development Server</h3>
+    <pre><code>npm run dev</code></pre>
+    <p>The Vite development server will provide a local URL such as: <code>http://localhost:5173</code></p>
+
+    <h3>Start JSON Server</h3>
+    <pre><code>json-server --watch db.json --port 5000</code></pre>
+    <p>The mock REST API will be available at: <code>http://localhost:5000</code> (or <code>http://localhost:3000</code>)</p>
+
+    <!-- Section 9 -->
+    <h2>9. Project Architecture</h2>
+    <div class="diagram-box">
+CameraStore/
+├── public/
+│   ├── favicon.svg
+│   └── vite.svg
+│
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   │
+│   ├── components/
+│   │   ├── Navbar.jsx              # Navigation header with search & badges
+│   │   ├── Footer.jsx              # Footer with trust badges & newsletter
+│   │   ├── ProductCard.jsx         # Product display card with pricing & cart actions
+│   │   ├── Banner.jsx              # Hero promotional banner
+│   │   ├── SearchBar.jsx           # Global keyword search component
+│   │   ├── Loader.jsx              # Loading spinner animation
+│   │   ├── Sidebar.jsx             # Filter drawer with brand & price sliders
+│   │   └── CategoryCard.jsx        # Department navigation card
+│   │
+│   ├── pages/
+│   │   ├── Home.jsx                # Landing page with hero & featured gear
+│   │   ├── Cameras.jsx             # Camera department catalog
+│   │   ├── Lenses.jsx              # Lenses catalog
+│   │   ├── Lighting.jsx            # Studio lighting catalog
+│   │   ├── Tripods.jsx             # Tripods and camera support gear
+│   │   ├── Bags.jsx                # Bags and hard cases catalog
+│   │   ├── Accessories.jsx         # Accessories and memory cards catalog
+│   │   ├── ProductDetails.jsx      # Product specs and image gallery
+│   │   ├── Wishlist.jsx            # Bookmarked favorites
+│   │   ├── Cart.jsx                # Shopping cart & coupon discount manager
+│   │   ├── Checkout.jsx            # Shipping & payment gateway
+│   │   ├── OrderSuccess.jsx        # Order confirmation & receipt
+│   │   ├── Profile.jsx             # Account overview & address manager
+│   │   ├── Login.jsx               # User authentication
+│   │   ├── Register.jsx            # Customer registration
+│   │   └── ForgotPassword.jsx      # Password recovery simulation
+│   │
+│   ├── admin/
+│   │   ├── AdminDashboard.jsx      # Sales analytics & catalog counts
+│   │   ├── AdminProducts.jsx       # Inventory management table
+│   │   ├── AddProduct.jsx          # New product creation form
+│   │   ├── EditProduct.jsx         # Inventory editing form
+│   │   └── AdminOrders.jsx         # Order fulfillment manager
+│   │
+│   ├── redux/
+│   │   ├── store.js                # Central Redux Toolkit store
+│   │   └── slices/
+│   │       ├── cartSlice.js        # Cart items & coupon logic
+│   │       ├── wishlistSlice.js    # Wishlist storage
+│   │       ├── authSlice.js        # Authentication session & roles
+│   │       └── productSlice.js     # Catalog state & async thunks
+│   │
+│   ├── services/
+│   │   └── api.js                  # Axios instance & offline resilience layer
+│   │
+│   ├── routes/
+│   │   └── AppRoutes.jsx           # Main routing registry
+│   │
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+│
+├── db.json
+├── package.json
+└── README.md
+    </div>
+
+    <!-- Section 10 -->
+    <h2>10. Application Routing</h2>
+    <table>
+      <thead>
+        <tr><th>Route</th><th>Page</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>/</code></td><td>Home</td><td>Application home page</td></tr>
+        <tr><td><code>/login</code></td><td>Login</td><td>User authentication</td></tr>
+        <tr><td><code>/register</code></td><td>Register</td><td>New user registration</td></tr>
+        <tr><td><code>/forgot-password</code></td><td>Forgot Password</td><td>Password recovery</td></tr>
+        <tr><td><code>/cameras</code></td><td>Cameras</td><td>Camera products catalog</td></tr>
+        <tr><td><code>/lenses</code></td><td>Lenses</td><td>Lens products catalog</td></tr>
+        <tr><td><code>/lighting</code></td><td>Lighting</td><td>Lighting equipment</td></tr>
+        <tr><td><code>/tripods</code></td><td>Tripods</td><td>Tripods and support</td></tr>
+        <tr><td><code>/bags</code></td><td>Camera Bags</td><td>Bags and cases</td></tr>
+        <tr><td><code>/accessories</code></td><td>Accessories</td><td>Photography accessories</td></tr>
+        <tr><td><code>/product/:id</code></td><td>Product Details</td><td>Individual product information</td></tr>
+        <tr><td><code>/wishlist</code></td><td>Wishlist</td><td>Saved products</td></tr>
+        <tr><td><code>/cart</code></td><td>Shopping Cart</td><td>Cart management &amp; discounts</td></tr>
+        <tr><td><code>/checkout</code></td><td>Checkout</td><td>Address and payment</td></tr>
+        <tr><td><code>/ordersuccess</code></td><td>Order Success</td><td>Order confirmation &amp; receipt</td></tr>
+        <tr><td><code>/profile</code></td><td>Profile</td><td>User account management</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Section 11 -->
+    <h2>11. Reusable Components</h2>
+    <h3>Navbar</h3>
+    <p>Provides access to major sections of the CameraStore application:</p>
+    <ul>
+      <li>CameraStore Logo</li>
+      <li>Department Links (Cameras, Lenses, Lighting, Tripods, Bags, Accessories)</li>
+      <li>Search Bar</li>
+      <li>Profile &amp; Orders Menu</li>
+      <li>Wishlist Counter Badge</li>
+      <li>Shopping Cart Counter Badge</li>
+    </ul>
+
+    <h3>Footer</h3>
+    <p>Contains supporting information and trust links:</p>
+    <ul>
+      <li>Customer Support &amp; Help Center</li>
+      <li>Company Information &amp; Policies</li>
+      <li>Social Media Community Links</li>
+      <li>Newsletter Subscription Form</li>
+    </ul>
+
+    <h3>ProductCard</h3>
+    <p>Reusable component used to display individual catalog items:</p>
+    <ul>
+      <li>Product Image with hover zoom</li>
+      <li>Brand &amp; Category Tags</li>
+      <li>Product Name &amp; Direct Link</li>
+      <li>Price, Original Price &amp; Discount Tag</li>
+      <li>Star Rating Score</li>
+      <li>Stock Status Indicator</li>
+      <li>Wishlist Toggle Action</li>
+      <li>Add to Cart Action</li>
+    </ul>
+
+    <h3>SearchBar</h3>
+    <p>Provides product discovery matching product name, brand, category, and compatibility.</p>
+
+    <!-- Section 12 & 13 -->
+    <h2>12. Application Pages (Home &amp; Cameras)</h2>
+    <h3>12.1 Home Page</h3>
+    <p>Primary landing page containing:</p>
+    <ul>
+      <li>Hero Promotional Banner</li>
+      <li>Photography Category Showcase Cards</li>
+      <li>Flash Deals &amp; Time-Limited Offers</li>
+      <li>New Arrivals Showcase</li>
+      <li>Featured Cameras &amp; Lenses Tabs</li>
+      <li>Trending Brands Showcase</li>
+    </ul>
+
+    <h3>12.2 Cameras Page</h3>
+    <p>Provides camera systems across all categories:</p>
+    <ul>
+      <li>DSLR Cameras</li>
+      <li>Mirrorless Cameras (Full-Frame &amp; APS-C)</li>
+      <li>Compact Cameras</li>
+      <li>Action &amp; 360 Cameras</li>
+      <li>Professional Cinema Cameras</li>
+    </ul>
+
+    <h2>13. Application Pages – Continued</h2>
+    <h3>13.1 Lenses Page</h3>
+    <p>Interchangeable lenses for major camera mounts (Prime, Zoom, Wide-Angle, Telephoto, Macro).</p>
+
+    <h3>13.2 Lighting Page</h3>
+    <p>Studio lighting equipment (LED Panels, Flash Units, Softboxes, Ring Lights, Continuous Lights).</p>
+
+    <h3>13.3 Tripods Page</h3>
+    <p>Support equipment (Carbon Fiber Tripods, Monopods, Motorized Gimbals, Fluid Heads).</p>
+
+    <h3>13.4 Camera Bags Page</h3>
+    <p>Carrying solutions (Backpacks, Shoulder Bags, Sling Bags, Waterproof Hard Cases).</p>
+
+    <h3>13.5 Accessories Page</h3>
+    <p>Supporting accessories (V90 Memory Cards, OEM Batteries, Rapid Chargers, VND Filters, Cleaning Swabs, Straps).</p>
+
+    <!-- Section 14 -->
+    <h2>14. Product Details Page</h2>
+    <p>Displays in-depth information about any selected product at route <code>/product/:id</code>.</p>
+    <ul>
+      <li>Multi-image gallery preview with thumbnail selector</li>
+      <li>Brand, name, and current pricing with discount computation</li>
+      <li>Star ratings and review counts</li>
+      <li>Live stock status and real-time inventory count</li>
+      <li>Full technical specifications (Megapixels, Sensor Size, Lens Mount, Video Formats)</li>
+      <li>Compatibility notes (supported lenses, batteries, cards)</li>
+      <li>Quantity controls and direct Add-to-Cart / Add-to-Wishlist actions</li>
+    </ul>
+
+    <!-- Section 15 -->
+    <h2>15. Authentication Module</h2>
+    <p>CameraStore provides simulated authentication workflows compatible with JSON Server:</p>
+    <ul>
+      <li><strong>Login Fields</strong>: Email, Password, Remember Me</li>
+      <li><strong>Registration Fields</strong>: Full Name, Email, Mobile Number, Password, Confirm Password</li>
+      <li><strong>Validation</strong>: Required checks, email format regex, 10-digit mobile number, and password matching</li>
+      <li><strong>Forgot Password Workflow</strong>: Email entry ➔ User verification ➔ OTP token ➔ Password update</li>
+    </ul>
+
+    <!-- Section 16 -->
+    <h2>16. Wishlist Module</h2>
+    <p>Allows users to bookmark cameras and lenses for future purchase:</p>
+    <ul>
+      <li>Add product to Wishlist with animated heart feedback</li>
+      <li>View all saved products on dedicated <code>/wishlist</code> route</li>
+      <li>Remove individual items or clear entire wishlist</li>
+      <li>One-click "Move to Cart" action</li>
+    </ul>
+
+    <!-- Section 17 -->
+    <h2>17. Shopping Cart Module</h2>
+    <p>Manages products selected for purchase with dynamic computations:</p>
+    <ul>
+      <li>View cart items with thumbnails, unit prices, and quantities</li>
+      <li>Increase and decrease quantity with stock boundaries</li>
+      <li>Remove specific product or clear cart</li>
+      <li>Apply promo coupon codes (<code>CAM10</code>, <code>FESTIVE20</code>, <code>PROPHOTO</code>)</li>
+      <li>Dynamic calculation of Subtotal, Discount, Shipping, and Final Total</li>
+    </ul>
+
+    <!-- Section 18 -->
+    <h2>18. Checkout Module</h2>
+    <p>Final stage of the shopping process:</p>
+    <ul>
+      <li><strong>Delivery Address</strong>: Full Name, Mobile Number, Street Address, City, State, Pincode</li>
+      <li><strong>Payment Method</strong>: Cash on Delivery, Credit/Debit Card, UPI, Net Banking</li>
+      <li><strong>Order Summary</strong>: Line items, subtotal, discount deduction, delivery fees, and grand total</li>
+    </ul>
+
+    <!-- Section 19 -->
+    <h2>19. Order Success Page</h2>
+    <p>Displayed after order submission at <code>/ordersuccess</code>:</p>
+    <ul>
+      <li>Order Confirmation Checkmark</li>
+      <li>Generated Order ID (e.g. <code>CAM-98421</code>)</li>
+      <li>Estimated Delivery Date Schedule</li>
+      <li>Order Items &amp; Billing Summary</li>
+      <li>Navigation buttons to "Continue Shopping" and "View Orders"</li>
+    </ul>
+
+    <!-- Section 20 -->
+    <h2>20. Profile Module</h2>
+    <p>Account management section at <code>/profile</code>:</p>
+    <ul>
+      <li>Personal Information (Name, Email, Phone)</li>
+      <li>Order History with live delivery statuses (Delivered, Shipped, Processing)</li>
+      <li>Saved Delivery Addresses</li>
+      <li>Saved Coupons Directory with one-click copy</li>
+      <li>Account Settings and Logout</li>
+    </ul>
+
+    <!-- Section 21 to 25: Redux -->
+    <h2>21. Redux Toolkit Architecture</h2>
+    <div class="diagram-box">
+React Components (Pages & UI)
+       │
+       ▼ dispatch(action) / useSelector()
+Redux Actions & Async Thunks
+       │
+       ▼
+Redux Slices (cartSlice, wishlistSlice, authSlice, productSlice)
+       │
+       ▼
+Redux Store (configureStore)
+       │
+       ▼
+Application State (Reactive & Persistent)
+    </div>
+
+    <h2>22. Cart Slice</h2>
+    <p>Manages shopping cart items, discount coupon validation, and financial calculations:</p>
+    <pre><code>// State Example:
+{
+  cartItems: [],
+  totalQuantity: 0,
+  subtotal: 0,
+  discountAmount: 0,
+  deliveryCharges: 0,
+  finalAmount: 0
+}</code></pre>
+
+    <h2>23. Wishlist Slice</h2>
+    <p>Manages bookmarks saved by the user with actions: <code>addToWishlist</code>, <code>removeFromWishlist</code>, <code>toggleWishlist</code>, and <code>moveToCart</code>.</p>
+
+    <h2>24. Authentication Slice</h2>
+    <p>Manages user authentication state, role-based privileges (Customer vs. Admin), and login credentials.</p>
+
+    <h2>25. Product Slice</h2>
+    <p>Manages catalog products, asynchronous API loading states, category filtering, search terms, and price ranges.</p>
+
+    <!-- Section 26 to 28: JSON Server & Endpoints -->
+    <h2>26. JSON Server Database</h2>
+    <p>The application uses JSON Server as a mock REST backend with collections in <code>db.json</code>:</p>
+    <pre><code>{
+  "users": [],
+  "products": [],
+  "categories": [],
+  "wishlist": [],
+  "cart": [],
+  "orders": [],
+  "coupons": []
+}</code></pre>
+
+    <h2>27 &amp; 28. REST API Endpoints</h2>
+    <table>
+      <thead>
+        <tr><th>Method</th><th>Endpoint</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>GET</code></td><td><code>/users</code></td><td>Retrieve all registered users</td></tr>
+        <tr><td><code>POST</code></td><td><code>/users</code></td><td>Register new user account</td></tr>
+        <tr><td><code>GET</code></td><td><code>/products</code></td><td>Retrieve all photography products</td></tr>
+        <tr><td><code>GET</code></td><td><code>/products/:id</code></td><td>Retrieve specific product details</td></tr>
+        <tr><td><code>POST</code></td><td><code>/products</code></td><td>Create new product (Admin)</td></tr>
+        <tr><td><code>PATCH</code></td><td><code>/products/:id</code></td><td>Update product fields (Admin)</td></tr>
+        <tr><td><code>DELETE</code></td><td><code>/products/:id</code></td><td>Delete product from catalog (Admin)</td></tr>
+        <tr><td><code>GET</code></td><td><code>/orders</code></td><td>Retrieve orders list</td></tr>
+        <tr><td><code>POST</code></td><td><code>/orders</code></td><td>Place a new customer order</td></tr>
+        <tr><td><code>PATCH</code></td><td><code>/orders/:id</code></td><td>Update order status</td></tr>
+        <tr><td><code>GET</code></td><td><code>/coupons</code></td><td>Retrieve active discount coupons</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Section 29 -->
+    <h2>29. Axios Service Layer</h2>
+    <p>API communication is centralized inside <code>src/services/api.js</code> with offline LocalStorage fallback:</p>
+    <pre><code>import axios from "axios";
+
+const api = axios.create({ baseURL: "http://localhost:5000" });
+
+export const getProducts = () => api.get("/products");
+export const getProductById = (id) => api.get(`/products/${id}`);
+export const createOrder = (order) => api.post("/orders", order);
+export const createProduct = (product) => api.post("/products", product);</code></pre>
+
+    <!-- Section 30 to 33 -->
+    <h2>30. Search Functionality</h2>
+    <p>Supports multi-field query matching against product name, brand, category, camera type, and lens mount.</p>
+
+    <h2>31. Product Filtering</h2>
+    <p>Refines catalog results across Category, Brand, Price Range Slider ($0 - $6,000), Rating (4★+), and Availability.</p>
+
+    <h2>32. Product Sorting</h2>
+    <p>Sorts products by Price (Low to High / High to Low), Customer Rating, Discount Percentage, and New Arrivals.</p>
+
+    <h2>33. Form Validation</h2>
+    <p>Validates all mandatory fields, email regex, 10-digit mobile numbers, and password confirmations on Login, Register, and Checkout forms.</p>
+
+    <!-- Section 34 & 35 -->
+    <h2>34. E-Commerce Workflow</h2>
+    <div class="diagram-box">
+Home Page
+   ↓
+Browse Catalog (Cameras / Lenses / Accessories)
+   ↓
+Search / Filter / Sort
+   ↓
+Product Details Page ──► Add to Wishlist
+   ↓
+Add to Cart
+   ↓
+Shopping Cart ──► Apply Promo Coupon
+   ↓
+Checkout (Address & Payment Selection)
+   ↓
+Place Order (POST /orders)
+   ↓
+Order Success Page (Invoice & Order ID)
+   ↓
+Order History Tracking
+    </div>
+
+    <h2>35. Data Flow Architecture</h2>
+    <div class="diagram-box">
+┌────────────────────────────────────────────────────────┐
+│                   React UI Layer                       │
+│  (Navbar, Home, Cameras, ProductDetails, Cart, Admin)  │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+            User Actions / Component Lifecycle
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│               Redux Toolkit State Layer                │
+│  - productSlice    - cartSlice                         │
+│  - wishlistSlice   - authSlice                         │
+└────────────┬─────────────────────────────▲─────────────┘
+             │                             │
+    Async Thunks / Dispatches      State Updates (useSelector)
+             │                             │
+             ▼                             │
+┌──────────────────────────────────────────┴─────────────┐
+│                 Axios API Service Layer                │
+│            (src/services/api.js + Storage)             │
+└──────────────────────────┬─────────────────────────────┘
+                           │
+                 REST API (HTTP Requests)
+                           │
+                           ▼
+┌────────────────────────────────────────────────────────┐
+│             JSON Server Backend (Port 5000)            │
+│                       (db.json)                        │
+└────────────────────────────────────────────────────────┘
+    </div>
+
+    <!-- Section 36 to 40 -->
+    <h2>36. Responsive Design</h2>
+    <p>Supports Desktop (1440px+), Laptops (1024px), Tablets (768px), and Smartphones (320px - 767px) with adaptive grids and off-canvas drawers.</p>
+
+    <h2>37. Security Considerations</h2>
+    <p>Includes protected admin route wrappers (<code>AdminWrapper</code>), input sanitization, masked credentials, and production readiness for JWT auth and HTTPS.</p>
+
+    <h2>38. Future Enhancements</h2>
+    <ul>
+      <li>JWT Authentication &amp; OAuth 2.0 Social Sign-In</li>
+      <li>Live payment integrations (Stripe, Razorpay, PayPal)</li>
+      <li>Production backend with Node.js/Express, Python/Django, or Spring Boot</li>
+      <li>Side-by-side camera spec comparison tool and 360-degree product preview</li>
+    </ul>
+
+    <h2>39. Testing Scope</h2>
+    <p>Covers Functional Testing (Auth, Cart, Checkout, Admin), UI/UX Testing (Responsive layouts, Modals), and API Testing (REST CRUD requests &amp; offline resilience).</p>
+
+    <h2>40. Learning Outcomes, Project Outcome &amp; Conclusion</h2>
+    <h3>Learning Outcomes</h3>
+    <ul>
+      <li>Built a Single Page Application using React.js 19 and Vite.</li>
+      <li>Implemented state management using Redux Toolkit slices and actions.</li>
+      <li>Constructed client-side routing with dynamic parameters and route guards.</li>
+      <li>Consumed REST APIs using Axios with mock backend data in JSON Server.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p><strong>CameraStore – Photography & Camera Marketplace</strong> is a comprehensive React.js project demonstrating the architecture and user experience of a modern e-commerce web application. The project provides an extensible foundation ready for production backend integration.</p>
+
+  </div>
+
+</body>
+</html>
