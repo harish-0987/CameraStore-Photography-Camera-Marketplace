@@ -2,6 +2,7 @@
 
 <div align="center">
 
+[![Netlify Deploy](https://img.shields.io/badge/Netlify-Live_Demo-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)](https://camerastore-photography-marketplace.netlify.app/)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.x-764ABC?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -11,7 +12,9 @@
 
 **A full-featured, cinema-grade e-commerce marketplace built for professional photographers, filmmakers, and digital creators.**
 
-[Live Demo](#-getting-started) • [Explore Features](#-key-features) • [Brand Portals](#-brand-storefronts) • [Admin Studio](#-admin-studio-control-panel) • [Tech Stack](#-technology-stack)
+🔗 **Live Website**: [https://camerastore-photography-marketplace.netlify.app](https://camerastore-photography-marketplace.netlify.app/)
+
+[🚀 Live Demo](https://camerastore-photography-marketplace.netlify.app/) • [Explore Features](#-key-features) • [Brand Portals](#-brand-storefronts) • [Admin Studio](#-admin-studio-control-panel) • [Tech Stack](#-technology-stack)
 
 </div>
 
@@ -170,6 +173,10 @@ camerastore/
 
 ## 🚀 Getting Started
 
+### 🌐 Live Production Demo
+Access the live application directly:  
+👉 **[camerastore-photography-marketplace.netlify.app](https://camerastore-photography-marketplace.netlify.app/)**
+
 ### Prerequisites
 - **Node.js**: v18.0.0 or higher
 - **npm** or **yarn** / **pnpm**
@@ -204,6 +211,7 @@ camerastore/
 
 Crafted with ❤️ by **Harish Peddapelly**
 
+- **Live Demo**: [camerastore-photography-marketplace.netlify.app](https://camerastore-photography-marketplace.netlify.app/)
 - **GitHub**: [@harish-0987](https://github.com/harish-0987)
 - **Repository**: [CameraStore – Photography & Cinema Marketplace](https://github.com/harish-0987/CameraStore-Photography-Camera-Marketplace)
 
