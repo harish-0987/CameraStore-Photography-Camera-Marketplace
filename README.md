@@ -200,6 +200,15 @@ camerastore/
 
 ---
 
+## 👨‍💻 Author
+
+Crafted with ❤️ by **Harish Peddapelly**
+
+- **GitHub**: [@harish-0987](https://github.com/harish-0987)
+- **Repository**: [CameraStore – Photography & Cinema Marketplace](https://github.com/harish-0987/CameraStore-Photography-Camera-Marketplace)
+
+---
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
