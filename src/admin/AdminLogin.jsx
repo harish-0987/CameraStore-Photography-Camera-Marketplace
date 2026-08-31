@@ -9,9 +9,7 @@ import {
   AlertCircle, 
   Eye, 
   EyeOff, 
-  ArrowLeft,
-  Sparkles,
-  Zap
+  ArrowLeft
 } from 'lucide-react';
 import { loginSuccess } from '../redux/slices/authSlice';
 import { useAuth } from '../context/AuthContext';
@@ -64,12 +62,6 @@ const AdminLogin = () => {
       setLoading(false);
       setError('Access Denied: Only authorized administrator emails are permitted.');
     }
-  };
-
-  const handleQuickDemoAdmin = () => {
-    setEmail('admin@camerastore.com');
-    setPassword('Admin@123');
-    setError('');
   };
 
   return (
@@ -174,15 +166,6 @@ const AdminLogin = () => {
             <ArrowRight size={16} />
           </button>
         </form>
-
-        {/* Quick Demo Credentials Autofill */}
-        <button
-          type="button"
-          className="quick-admin-demo-btn"
-          onClick={handleQuickDemoAdmin}
-        >
-          <Zap size={14} /> Quick Demo Fill (admin@camerastore.com)
-        </button>
 
         <div className="auth-footer text-center" style={{ marginTop: '22px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '16px' }}>
           <Link to="/" style={{ color: 'var(--text-muted)', fontSize: '0.82rem', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
