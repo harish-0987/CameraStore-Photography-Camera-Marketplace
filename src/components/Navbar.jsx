@@ -244,13 +244,6 @@ const Navbar = () => {
                 </Link>
               ))}
             </div>
-
-            <div className="nav-extra-tags">
-              <Link to="/admin" className="hot-tag" style={{ background: 'rgba(249, 115, 22, 0.15)', borderColor: 'rgba(249, 115, 22, 0.4)', color: 'var(--primary)' }}>
-                ⚡ Admin Studio
-              </Link>
-              <Link to="/cameras" className="hot-tag">🔥 8K Pro Cine</Link>
-            </div>
           </div>
         </div>
 
