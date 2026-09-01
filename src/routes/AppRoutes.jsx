@@ -21,6 +21,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 import BrandPage from '../pages/BrandPage';
+import SearchPage from '../pages/Search';
 
 // Admin Pages
 import AdminLogin from '../admin/AdminLogin';
@@ -57,6 +58,7 @@ const AppRoutes = () => {
       <Route path="/brand" element={<BrandPage />} />
       <Route path="/brands/:brandName" element={<BrandPage />} />
       <Route path="/brands" element={<BrandPage />} />
+      <Route path="/search" element={<SearchPage />} />
       <Route path="/product/:id" element={<ProductDetails />} />
 
       {/* 2. E-Commerce Flow Routes */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { 
@@ -12,7 +12,8 @@ import {
   ChevronDown,
   LogOut,
   Package,
-  Shield
+  Shield,
+  ArrowRight
 } from 'lucide-react';
 import { logout } from '../redux/slices/authSlice';
 import '../styles/navbar.css';
@@ -21,6 +22,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const searchWrapperRef = useRef(null);
 
   const cartQuantity = useSelector(state => state.cart.totalQuantity);
   const wishlistItems = useSelector(state => state.wishlist.wishlistItems);
@@ -42,16 +44,30 @@ const Navbar = () => {
     { label: 'Accessories', path: '/accessories' },
   ];
 
-  const filteredPreview = navSearch.trim() === '' ? [] : products.filter(p => 
-    p.name.toLowerCase().includes(navSearch.toLowerCase()) ||
-    p.brand.toLowerCase().includes(navSearch.toLowerCase()) ||
-    p.category.toLowerCase().includes(navSearch.toLowerCase())
-  ).slice(0, 5);
+  // Close search preview on outside click
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (searchWrapperRef.current && !searchWrapperRef.current.contains(e.target)) {
+        setSearchPreviewOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
+  const filteredPreview = navSearch.trim() === '' ? [] : products.filter(p => {
+    const term = navSearch.toLowerCase().trim();
+    const name = (p.name || '').toLowerCase();
+    const brand = (p.brand || '').toLowerCase();
+    const category = (p.category || '').toLowerCase();
+    const subCategory = (p.subCategory || p.type || '').toLowerCase();
+    return name.includes(term) || brand.includes(term) || category.includes(term) || subCategory.includes(term);
+  }).slice(0, 5);
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (navSearch.trim()) {
-      navigate(`/cameras?search=${encodeURIComponent(navSearch.trim())}`);
+      navigate(`/search?q=${encodeURIComponent(navSearch.trim())}`);
       setSearchPreviewOpen(false);
     }
   };
@@ -79,7 +95,7 @@ const Navbar = () => {
           </Link>
 
           {/* Search Bar with live preview */}
-          <div className="nav-search-wrapper">
+          <div className="nav-search-wrapper" ref={searchWrapperRef}>
             <form onSubmit={handleSearchSubmit} className="nav-search-form">
               <Search size={18} className="search-icon" />
               <input
@@ -90,13 +106,18 @@ const Navbar = () => {
                   setNavSearch(e.target.value);
                   setSearchPreviewOpen(true);
                 }}
-                onFocus={() => setSearchPreviewOpen(true)}
+                onFocus={() => {
+                  if (navSearch.trim()) setSearchPreviewOpen(true);
+                }}
               />
               {navSearch && (
                 <button 
                   type="button" 
                   className="clear-search-btn"
-                  onClick={() => setNavSearch('')}
+                  onClick={() => {
+                    setNavSearch('');
+                    setSearchPreviewOpen(false);
+                  }}
                 >
                   <X size={14} />
                 </button>
@@ -104,26 +125,66 @@ const Navbar = () => {
             </form>
 
             {/* Quick Preview Dropdown */}
-            {searchPreviewOpen && filteredPreview.length > 0 && (
+            {searchPreviewOpen && navSearch.trim() && (
               <div className="search-preview-box">
-                <div className="search-preview-header">Instant Results</div>
-                {filteredPreview.map(item => (
-                  <Link
-                    key={item.id}
-                    to={`/product/${item.id}`}
-                    className="search-preview-item"
-                    onClick={() => setSearchPreviewOpen(false)}
-                  >
-                    <img src={item.image} alt={item.name} className="search-preview-img" />
-                    <div className="search-preview-info">
-                      <div className="search-preview-title">{item.name}</div>
-                      <div className="search-preview-meta">
-                        <span className="search-preview-brand">{item.brand}</span>
-                        <span className="search-preview-price">${item.price}</span>
-                      </div>
+                <div className="search-preview-header">
+                  <span>Instant Results</span>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Press Enter to view all</span>
+                </div>
+                {filteredPreview.length > 0 ? (
+                  <>
+                    {filteredPreview.map(item => (
+                      <Link
+                        key={item.id}
+                        to={`/product/${item.id}`}
+                        className="search-preview-item"
+                        onClick={() => setSearchPreviewOpen(false)}
+                      >
+                        <img src={item.image} alt={item.name} className="search-preview-img" />
+                        <div className="search-preview-info">
+                          <div className="search-preview-title">{item.name}</div>
+                          <div className="search-preview-meta">
+                            <span className="search-preview-brand">{item.brand}</span>
+                            <span style={{ color: 'var(--text-muted)' }}>•</span>
+                            <span style={{ color: 'var(--text-muted)' }}>{item.category}</span>
+                            <span className="search-preview-price">${item.price}</span>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                    <div 
+                      className="search-preview-footer"
+                      style={{
+                        padding: '10px 16px',
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        borderTop: '1px solid var(--border-color)',
+                        textAlign: 'center'
+                      }}
+                    >
+                      <button
+                        type="button"
+                        onClick={handleSearchSubmit}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          color: 'var(--primary)',
+                          fontWeight: 700,
+                          fontSize: '0.82rem',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
+                      >
+                        View all search results for "{navSearch}" <ArrowRight size={14} />
+                      </button>
                     </div>
-                  </Link>
-                ))}
+                  </>
+                ) : (
+                  <div style={{ padding: '16px', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
+                    No quick preview matches. <button type="button" onClick={handleSearchSubmit} style={{ background: 'none', border: 'none', color: 'var(--primary)', textDecoration: 'underline', cursor: 'pointer', padding: 0 }}>Search all gear</button>
+                  </div>
+                )}
               </div>
             )}
           </div>

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { ArrowLeft, Plus, Sparkles, Image, Eye, Tag, DollarSign, ShieldAlert, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { addProductLocal } from '../redux/slices/productSlice';
 import '../styles/admin.css';
 
 const categorySubCategoriesMap = {
@@ -16,6 +18,7 @@ const categorySubCategoriesMap = {
 const defaultFallbackImg = "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80";
 
 const AddProduct = () => {
+  const dispatch = useDispatch();
   const { addProduct } = useCart();
   const navigate = useNavigate();
 
@@ -66,6 +69,7 @@ const AddProduct = () => {
       originalPrice: originalPriceNum,
       stock: Number(formData.stock) || 10
     };
+    dispatch(addProductLocal(newProduct));
     addProduct(newProduct);
     navigate('/admin/products');
   };
