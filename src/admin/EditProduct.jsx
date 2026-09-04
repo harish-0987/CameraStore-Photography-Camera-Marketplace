@@ -184,7 +184,7 @@ const EditProduct = () => {
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '14px' }}>
                 <div className="admin-form-group">
-                  <label>Retail Price ($) *</label>
+                  <label>Retail Price (₹) *</label>
                   <input
                     type="number"
                     name="price"
@@ -195,7 +195,7 @@ const EditProduct = () => {
                 </div>
 
                 <div className="admin-form-group">
-                  <label>MSRP / Original ($)</label>
+                  <label>MSRP / Original (₹)</label>
                   <input
                     type="number"
                     name="originalPrice"

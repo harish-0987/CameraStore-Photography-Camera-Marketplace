@@ -31,7 +31,7 @@ const calculateTotals = (items, appliedCoupon) => {
     }
   }
 
-  // Free shipping over $100
+  // Free shipping over ₹100
   const deliveryCharges = subtotal === 0 ? 0 : (subtotal > 100 ? 0 : 15);
   const finalAmount = Math.max(0, subtotal - discountAmount + deliveryCharges);
 
@@ -131,7 +131,7 @@ const cartSlice = createSlice({
         return;
       }
       if (state.subtotal < (found.minSpend || 0)) {
-        state.couponError = `Minimum order spend of $${found.minSpend} required for code ${code}`;
+        state.couponError = `Minimum order spend of ₹${found.minSpend} required for code ${code}`;
         return;
       }
       state.appliedCoupon = found;

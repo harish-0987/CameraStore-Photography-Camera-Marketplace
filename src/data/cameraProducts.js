@@ -69,14 +69,14 @@ export const activeCoupons = [
     discountAmount: 150,
     type: "fixed",
     minAmount: 1000,
-    description: "$150 Instant Rebate on professional orders over $1,000"
+    description: "₹150 Instant Rebate on professional orders over ₹1,000"
   },
   {
     code: "FESTIVE20",
     discountPercent: 20,
     type: "percentage",
     minAmount: 500,
-    description: "20% Creator Festival discount on orders over $500"
+    description: "20% Creator Festival discount on orders over ₹500"
   },
   {
     code: "WELCOME5",

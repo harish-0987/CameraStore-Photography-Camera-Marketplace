@@ -38,7 +38,7 @@ const Footer = () => {
             <div className="newsletter-badge">
               <Sparkles size={14} /> VIP CREATOR CLUB
             </div>
-            <h3 className="newsletter-title">Get $50 Off Your First Pro Camera Order</h3>
+            <h3 className="newsletter-title">Get ₹50 Off Your First Pro Camera Order</h3>
             <p className="newsletter-desc">
               Subscribe for exclusive flash deals, firmware updates, cinema lens masterclasses, and photography gear announcements.
             </p>
@@ -48,7 +48,7 @@ const Footer = () => {
             {subscribed ? (
               <div className="subscribed-success-message">
                 <CheckCircle2 size={20} color="#10b981" />
-                <span>Thank you! Your $50 VIP coupon code <strong>CREATOR50</strong> has been activated.</span>
+                <span>Thank you! Your ₹50 VIP coupon code <strong>CREATOR50</strong> has been activated.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="newsletter-input-box">

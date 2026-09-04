@@ -165,7 +165,7 @@ const Bags = () => {
           <div className="filter-group">
             <div className="filter-title-row">
               <h4 className="filter-group-title">Max Price</h4>
-              <span className="price-val-indicator">${priceRange.toLocaleString()}</span>
+              <span className="price-val-indicator">₹{priceRange.toLocaleString()}</span>
             </div>
             <input
               type="range"
@@ -177,8 +177,8 @@ const Bags = () => {
               className="price-slider-input"
             />
             <div className="slider-limits">
-              <span>$20</span>
-              <span>$1,500+</span>
+              <span>₹20</span>
+              <span>₹1,500+</span>
             </div>
           </div>
         </aside>

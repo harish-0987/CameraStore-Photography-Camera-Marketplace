@@ -104,7 +104,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="hero-floating-tag bottom-right">
-                <div className="tag-price">$2,498</div>
+                <div className="tag-price">₹2,498</div>
                 <div className="tag-stock">In Stock & Ready to Ship</div>
               </div>
             </div>

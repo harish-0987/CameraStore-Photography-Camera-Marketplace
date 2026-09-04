@@ -239,9 +239,9 @@ const ProductDetails = () => {
             {/* Price Section */}
             <div className="product-price-box">
               <div className="price-main-display">
-                <span className="price-current">${product.price.toLocaleString()}</span>
+                <span className="price-current">₹{product.price.toLocaleString()}</span>
                 {product.originalPrice && product.originalPrice > product.price && (
-                  <span className="price-original">${product.originalPrice.toLocaleString()}</span>
+                  <span className="price-original">₹{product.originalPrice.toLocaleString()}</span>
                 )}
               </div>
               {product.originalPrice && product.originalPrice > product.price && (
@@ -508,7 +508,7 @@ const ProductDetails = () => {
                     <Truck size={24} color="#38bdf8" />
                     <div>
                       <h4>Express Insured Courier Shipping</h4>
-                      <p>Orders over $100 receive free tracked courier shipping with tamper-evident security tape and shock-absorbent cushioning.</p>
+                      <p>Orders over ₹100 receive free tracked courier shipping with tamper-evident security tape and shock-absorbent cushioning.</p>
                     </div>
                   </div>
                   <div className="warranty-point">

@@ -70,7 +70,7 @@ const Orders = () => {
                     </div>
                     <div style={{ borderLeft: '1px solid var(--border-color)', paddingLeft: '16px' }}>
                       <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Total Amount</span>
-                      <div style={{ fontFamily: 'Space Grotesk', fontSize: '1rem', fontWeight: 800, color: '#ffffff' }}>${Number(order.totalAmount).toLocaleString()}</div>
+                      <div style={{ fontFamily: 'Space Grotesk', fontSize: '1rem', fontWeight: 800, color: '#ffffff' }}>₹{Number(order.totalAmount).toLocaleString()}</div>
                     </div>
                   </div>
 

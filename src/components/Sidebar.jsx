@@ -107,7 +107,7 @@ const Sidebar = ({
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '8px' }}>
           <span>Max Price</span>
-          <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>${priceRange}</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>₹{priceRange}</span>
         </div>
         <input
           type="range"
@@ -119,8 +119,8 @@ const Sidebar = ({
           style={{ width: '100%', accentColor: 'var(--text-primary)', cursor: 'pointer' }}
         />
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-          <span>$100</span>
-          <span>${maxPrice}</span>
+          <span>₹100</span>
+          <span>₹{maxPrice}</span>
         </div>
       </div>
     </aside>

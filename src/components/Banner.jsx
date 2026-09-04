@@ -41,7 +41,7 @@ const Banner = ({ type = 'hero' }) => {
           <div className="trust-icon-box"><Truck size={22} color="#f97316" /></div>
           <div>
             <div className="trust-item-title">Free Express Shipping</div>
-            <div className="trust-item-desc">On all orders over $100 worldwide</div>
+            <div className="trust-item-desc">On all orders over ₹100 worldwide</div>
           </div>
         </div>
         <div className="trust-feature-item">

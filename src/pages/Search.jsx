@@ -261,7 +261,7 @@ const SearchPage = () => {
           <div className="filter-group">
             <div className="filter-title-row">
               <h4 className="filter-group-title">Max Price</h4>
-              <span className="price-val-indicator">${priceRange.toLocaleString()}</span>
+              <span className="price-val-indicator">₹{priceRange.toLocaleString()}</span>
             </div>
             <input
               type="range"
@@ -273,8 +273,8 @@ const SearchPage = () => {
               className="price-slider-input"
             />
             <div className="slider-limits">
-              <span>$50</span>
-              <span>$10,000+</span>
+              <span>₹50</span>
+              <span>₹10,000+</span>
             </div>
           </div>
 

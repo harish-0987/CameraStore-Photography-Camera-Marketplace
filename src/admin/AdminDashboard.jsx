@@ -158,7 +158,7 @@ const AdminDashboard = () => {
               </div>
             </div>
             <div>
-              <div className="stat-num">${totalRevenue.toLocaleString()}</div>
+              <div className="stat-num">₹{totalRevenue.toLocaleString()}</div>
               <div className="stat-label">Gross Revenue</div>
             </div>
             <div className="stat-sparkline">
@@ -270,7 +270,7 @@ const AdminDashboard = () => {
                   <span style={{ width: '8px', height: '8px', borderRadius: '2px', background: '#38bdf8' }}></span> Pro Cine Bundles
                 </span>
               </div>
-              <span style={{ color: '#34d399', fontWeight: 700 }}>● Peak Pacing: $11,200 (Friday)</span>
+              <span style={{ color: '#34d399', fontWeight: 700 }}>● Peak Pacing: ₹11,200 (Friday)</span>
             </div>
           </div>
 

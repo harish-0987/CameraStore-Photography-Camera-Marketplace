@@ -83,9 +83,9 @@ const ProductCard = ({ product }) => {
 
           <div className="product-pricing-row">
             <div className="price-group">
-              <span className="current-price">${Number(product.price).toLocaleString()}</span>
+              <span className="current-price">₹{Number(product.price).toLocaleString()}</span>
               {product.originalPrice && product.originalPrice > product.price && (
-                <span className="original-price">${Number(product.originalPrice).toLocaleString()}</span>
+                <span className="original-price">₹{Number(product.originalPrice).toLocaleString()}</span>
               )}
             </div>
 

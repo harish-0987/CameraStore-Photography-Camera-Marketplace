@@ -94,9 +94,9 @@ const Wishlist = () => {
                   </div>
 
                   <div className="wishlist-price-row">
-                    <span className="wishlist-current-price">${Number(item.price).toLocaleString()}</span>
+                    <span className="wishlist-current-price">₹{Number(item.price).toLocaleString()}</span>
                     {item.originalPrice && item.originalPrice > item.price && (
-                      <span className="wishlist-orig-price">${Number(item.originalPrice).toLocaleString()}</span>
+                      <span className="wishlist-orig-price">₹{Number(item.originalPrice).toLocaleString()}</span>
                     )}
                   </div>
 

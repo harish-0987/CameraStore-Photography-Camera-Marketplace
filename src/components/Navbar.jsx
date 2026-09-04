@@ -147,7 +147,7 @@ const Navbar = () => {
                             <span className="search-preview-brand">{item.brand}</span>
                             <span style={{ color: 'var(--text-muted)' }}>•</span>
                             <span style={{ color: 'var(--text-muted)' }}>{item.category}</span>
-                            <span className="search-preview-price">${item.price}</span>
+                            <span className="search-preview-price">₹{item.price}</span>
                           </div>
                         </div>
                       </Link>

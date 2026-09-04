@@ -323,7 +323,7 @@ const Checkout = () => {
                       <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#fff', lineHeight: 1.2 }}>{item.name}</div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Qty: {item.quantity} × ${item.price}</div>
                     </div>
-                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fff' }}>${(item.price * item.quantity).toLocaleString()}</div>
+                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#fff' }}>₹{(item.price * item.quantity).toLocaleString()}</div>
                   </div>
                 ))}
               </div>
@@ -331,22 +331,22 @@ const Checkout = () => {
               <div className="summary-calculations">
                 <div className="calc-row">
                   <span className="calc-label">Subtotal</span>
-                  <span className="calc-val">${subtotal.toLocaleString()}</span>
+                  <span className="calc-val">₹{subtotal.toLocaleString()}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="calc-row discount-row">
                     <span className="calc-label">Coupon Rebate ({appliedCoupon?.code})</span>
-                    <span className="calc-val">-${discountAmount.toLocaleString()}</span>
+                    <span className="calc-val">-₹{discountAmount.toLocaleString()}</span>
                   </div>
                 )}
                 <div className="calc-row">
                   <span className="calc-label">Priority Courier Shipping</span>
-                  <span className="calc-val">{deliveryCharges === 0 ? 'FREE' : `$${deliveryCharges}`}</span>
+                  <span className="calc-val">{deliveryCharges === 0 ? 'FREE' : `₹${deliveryCharges}`}</span>
                 </div>
                 <div className="calc-divider" />
                 <div className="calc-row grand-total-row">
                   <span className="total-label">Grand Total</span>
-                  <span className="total-val">${finalAmount.toLocaleString()}</span>
+                  <span className="total-val">₹{finalAmount.toLocaleString()}</span>
                 </div>
               </div>
 
@@ -355,7 +355,7 @@ const Checkout = () => {
                 className="btn-primary checkout-proceed-btn"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Securing Your Order...' : `Place Order • $${finalAmount.toLocaleString()}`}
+                {isSubmitting ? 'Securing Your Order...' : `Place Order • ₹${finalAmount.toLocaleString()}`}
               </button>
 
               <div className="summary-trust-badges">

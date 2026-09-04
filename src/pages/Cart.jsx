@@ -122,7 +122,7 @@ const Cart = () => {
                         <Link to={`/product/${item.id}`} className="item-title-link">
                           <h4>{item.name}</h4>
                         </Link>
-                        <span className="item-unit-price">${Number(item.price).toLocaleString()} each</span>
+                        <span className="item-unit-price">₹{Number(item.price).toLocaleString()} each</span>
                         <button
                           className="item-remove-btn"
                           onClick={() => dispatch(removeFromCart(item.id))}
@@ -227,7 +227,7 @@ const Cart = () => {
                           CAM10 (10% Off)
                         </button>
                         <button type="button" onClick={() => handleQuickCoupon('PROPHOTO')}>
-                          PROPHOTO ($150 Off)
+                          PROPHOTO (₹150 Off)
                         </button>
                       </div>
                     </div>
@@ -238,13 +238,13 @@ const Cart = () => {
                 <div className="summary-calculations">
                   <div className="calc-row">
                     <span className="calc-label">Subtotal ({totalQuantity} items)</span>
-                    <span className="calc-val">${subtotal.toLocaleString()}</span>
+                    <span className="calc-val">₹{subtotal.toLocaleString()}</span>
                   </div>
 
                   {discountAmount > 0 && (
                     <div className="calc-row discount-row">
                       <span className="calc-label">Coupon Discount ({appliedCoupon?.code})</span>
-                      <span className="calc-val">-${discountAmount.toLocaleString()}</span>
+                      <span className="calc-val">-₹{discountAmount.toLocaleString()}</span>
                     </div>
                   )}
 
@@ -254,7 +254,7 @@ const Cart = () => {
                       {deliveryCharges === 0 ? (
                         <span className="free-shipping-badge">FREE</span>
                       ) : (
-                        `$${deliveryCharges}`
+                        `₹${deliveryCharges}`
                       )}
                     </span>
                   </div>
@@ -263,7 +263,7 @@ const Cart = () => {
 
                   <div className="calc-row grand-total-row">
                     <span className="total-label">Grand Total</span>
-                    <span className="total-val">${finalAmount.toLocaleString()}</span>
+                    <span className="total-val">₹{finalAmount.toLocaleString()}</span>
                   </div>
                 </div>
 
